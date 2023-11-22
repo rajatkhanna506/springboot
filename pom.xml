@@ -44,4 +44,8 @@
 		</plugins>
 	</build>
 
+	<modules>
+		<module>learn core</module>
+		<module>learnredis</module>
+	</modules>
 </project>

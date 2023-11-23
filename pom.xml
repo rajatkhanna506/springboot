@@ -48,7 +48,7 @@
 	</build>
 
 	<modules>
-		<module>learn core</module>
+		<module>learncore</module>
 		<module>learnredis</module>
 	</modules>
 </project>

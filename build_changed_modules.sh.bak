@@ -38,7 +38,7 @@ done <<< "$changedFiles"
 for file in "${filesArray[@]}"; do
 	if [[ "$file" == *"learncore"* ]]; then
 		echo "learncore child module"
-	elif [[ "$file" == *"learnredis"* ]]; then
+	else if[[ "$file" == *"learnredis"* ]]; then
 		echo "learn redis child module"
 	else
 		echo "parent module"

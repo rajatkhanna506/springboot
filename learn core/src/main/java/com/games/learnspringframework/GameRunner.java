@@ -10,6 +10,7 @@ public class GameRunner {
 	private GamingConsole game;
 	int ab;
 	int xyz;
+	int d;
 
 	public GameRunner(GamingConsole game) {
 		this.game = game;

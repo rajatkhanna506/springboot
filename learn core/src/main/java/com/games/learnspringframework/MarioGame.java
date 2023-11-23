@@ -33,6 +33,6 @@ public class MarioGame implements GamingConsole {
 	@Override
 	public void direction()
 	{
-	    System.out.println("directions");
+	    System.out.println("directions and");
 	}
 }

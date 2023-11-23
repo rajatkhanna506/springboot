@@ -30,6 +30,6 @@ public class SuperContraGame implements GamingConsole {
 
     public void direction()
     {
-        System.out.println("directions");
+        System.out.println("directions and");
     }
 }

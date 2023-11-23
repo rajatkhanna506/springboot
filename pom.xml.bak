@@ -6,6 +6,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
+		<packaging>pom</packaging>
 	</parent>
 	<groupId>com.games</groupId>
 	<artifactId>learn-spring-framework</artifactId>
@@ -43,4 +44,8 @@
 		</plugins>
 	</build>
 
+	<modules>
+		<module>learn core</module>
+		<module>learnredis</module>
+	</modules>
 </project>

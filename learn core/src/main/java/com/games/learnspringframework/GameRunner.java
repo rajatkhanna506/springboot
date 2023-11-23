@@ -8,6 +8,7 @@ public class GameRunner {
 	
 	@Autowired
 	private GamingConsole game;
+	int ab;
 
 	public GameRunner(GamingConsole game) {
 		this.game = game;

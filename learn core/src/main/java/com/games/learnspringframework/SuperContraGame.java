@@ -26,4 +26,10 @@ public class SuperContraGame implements GamingConsole {
 		System.out.println("super right");
 
 	}
+	
+
+    public void direction()
+    {
+        System.out.println("direction");
+    }
 }

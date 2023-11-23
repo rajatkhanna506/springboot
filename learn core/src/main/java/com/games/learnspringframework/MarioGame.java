@@ -29,4 +29,10 @@ public class MarioGame implements GamingConsole {
 		System.out.println("right");
 
 	}
+	
+	@Override
+	public void direction()
+	{
+	    System.out.println("direction");
+	}
 }

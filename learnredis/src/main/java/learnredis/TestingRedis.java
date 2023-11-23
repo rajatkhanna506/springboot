@@ -18,6 +18,7 @@ package learnredis;
 public class TestingRedis {
 
   int a;
+  int b;
 }
 
 

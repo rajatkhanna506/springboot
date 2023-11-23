@@ -9,5 +9,7 @@ public interface GamingConsole {
 	void left();
 
 	void right();
+	 
+	void direction();
 
 }

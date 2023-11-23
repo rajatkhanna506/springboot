@@ -23,6 +23,7 @@ public class TestingRedis {
   int d;
   int e;
   int f;
+  int g;
 }
 
 

@@ -68,13 +68,13 @@ echo "files Array: ${filesArray[@]}"
 for file in "${filesArray[@]}"; do
 	if [[ "$file" == *"learncore"* ]]; then
 		echo "learn core child module"
-		#addToMyArray "learncore"
+		addToMyArray "learncore"
 	elif [[ "$file" == *"learnredis"* ]]; then
 		echo "learn redis child module"
-		#addToMyArray "learnredis"
+		addToMyArray "learnredis"
 	else
 		echo "parent module"
-		#addToMyArray "parentmodule"
+		addToMyArray "parentmodule"
 		#isParentModule
 	fi
     #echo "File: $file"

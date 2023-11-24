@@ -20,12 +20,40 @@ getChangedModules() {
 	
 }
 
+
+isParentModule() {
+mvn -f ${MODULE_NAME}/pom.xml versions:set -DnewVersion=${NEW_VERSION}
+
+    if grep -q '<packaging>pom</packaging>' pom.xml; then
+		echo "parent moudle deployment"
+        return 0 # true
+		
+    else
+		echo "NOT a parent moudle deployment"
+        return 1 # false
+    fi
+	# old code but remove deprocess but have to update child version as well
+}
+
+# Function to add data to the array if not present
+addToMyArray() {
+    local data=$1
+    # Check if the data is not already in the array
+    if [[ ! " ${myArray[@]} " =~ " $data " ]]; then
+        myArray+=("$data")
+        echo "Added '$data' to the array."
+    else
+        echo "'$data' is already in the array. Not added."
+    fi
+}
+
 # Main script
 declare -a filesArray
+declare -a myArray
 	echo "start checking changes"
 	changedFiles=$(git diff --name-only HEAD^)
 	echo $changedFiles
-	rootPath=$(git rev-parse --show-toplevel)
+	#rootPath=$(git rev-parse --show-toplevel)
 	IFS=$'\n'
 	while read -r file; do
     #completePath="${rootPath}/${file}"
@@ -34,18 +62,26 @@ declare -a filesArray
     filesArray+=("${completePath}")
 done <<< "$changedFiles"
 
+echo "files Array: ${filesArray[@]}"
+
 # Print the array elements
 for file in "${filesArray[@]}"; do
 	if [[ "$file" == *"learncore"* ]]; then
-		echo "learncore child module"
-	else if[[ "$file" == *"learnredis"* ]]; then
+		echo "learn core child module"
+		#addToMyArray "learncore"
+	elif [[ "$file" == *"learnredis"* ]]; then
 		echo "learn redis child module"
+		#addToMyArray "learnredis"
 	else
 		echo "parent module"
+		#addToMyArray "parentmodule"
+		#isParentModule
 	fi
     #echo "File: $file"
 done
 echo "now complete paths"
+echo "Updated Array: ${myArray[@]}"
+
 # Iterate through the changed files and print the complete paths
 #IFS=$'\n'
 #for file in $changedFiles; do

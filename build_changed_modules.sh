@@ -82,6 +82,11 @@ done
 echo "now complete paths"
 echo "Updated Array: ${myArray[@]}"
 
+for item in "${myArray[@]}"; do
+	if[[ "$item" == *"parentmodule"* ]]; then
+		#mvn versions:set -DnewVersion="4.200.0" -DgroupId=your_group_id -DartifactId=your_child_module_id
+		mvn -f ${learnredis}/pom.xml versions:set -DnewVersion="4.200.0"
+
 # Iterate through the changed files and print the complete paths
 #IFS=$'\n'
 #for file in $changedFiles; do

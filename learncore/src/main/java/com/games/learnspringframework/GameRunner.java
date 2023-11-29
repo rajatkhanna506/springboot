@@ -13,8 +13,8 @@ public class GameRunner {
 	int d;
 	int e;
 	int z;
-	int lcd;
 	int h;
+	
 
 	public GameRunner(GamingConsole game) {
 		this.game = game;

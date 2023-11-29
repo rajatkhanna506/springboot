@@ -14,6 +14,7 @@ public class GameRunner {
 	int e;
 	int z;
 	int lcd;
+	int h;
 
 	public GameRunner(GamingConsole game) {
 		this.game = game;

@@ -1,25 +1,42 @@
 #!/bin/bash
 
 # Function to get changed modules
-getChangedModules() {
-    local changedModules=()
-    local changesetFile="changeset.txt"
-    # Get the list of changed files
-    git diff --name-only HEAD^ HEAD > "$changesetFile"
-    # Extract module names from the changed files
-    while IFS= read -r path; do
-        if [[ "$path" == "module/"* ]]; then
-            module=$(echo "$path" | cut -d'/' -f2)
-            if [[ ! " ${changedModules[@]} " =~ " $module " ]]; then
-                changedModules+=("$module")
-            fi
-        fi
-    done < "$changesetFile"
+MAJOR_VERSION=4
+PATCH_VERSION=0
+Updateversion(){
+local module=$1
 
-    echo "${changedModules[@]}"
-	
+# Assuming you are in the root directory of your project
+projectRoot="C:/Spring/spring/learn-spring-framework"
+
+# Specify the source module and its version.db file
+echo "Chnaged in module $module"
+sourceFile="${projectRoot}/${module}/current-minor-version.db"
+echo "source file $sourceFile"
+ MINOR_VERSION=`cat $sourceFile`
+  #if [[ $GIT_BRANCH == *Develop* ]]
+  #then
+  #  GIT_BRANCH="Develop"
+	#	MINOR_VERSION="$((MINOR_VERSION + 1))"
+ # else
+  #  GIT_BRANCH="master"
+  #fi
+  MINOR_VERSION="$((MINOR_VERSION + 1))"
+  CURRENT_VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
+  echo "Setting up MiloCommon Current Version: $CURRENT_VERSION"
+ 		mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+
 }
 
+commit_db_updates(){
+  echo "Minor Version $MINOR_VERSION update to GitHub $GIT_BRANCH"
+  git fetch && git checkout $GIT_BRANCH
+  echo $MINOR_VERSION>current-minor-version.db
+  git status
+  git add current-minor-version.db
+  git commit -m "Updated release version file"
+  git push origin $GIT_BRANCH --force
+}
 
 isParentModule() {
 mvn -f ${MODULE_NAME}/pom.xml versions:set -DnewVersion=${NEW_VERSION}
@@ -62,7 +79,7 @@ declare -a myArray
     filesArray+=("${completePath}")
 done <<< "$changedFiles"
 
-echo "files Array: ${filesArray[@]}"
+#echo "files Array: ${filesArray[@]}"
 
 # Print the array elements
 for file in "${filesArray[@]}"; do
@@ -79,37 +96,15 @@ for file in "${filesArray[@]}"; do
 	fi
     #echo "File: $file"
 done
-echo "now complete paths"
 echo "Updated Array: ${myArray[@]}"
 
 for item in "${myArray[@]}"; do
 	if [[ "$item" == *"learnredis"* ]]; then
 		#mvn versions:set -DnewVersion="4.200.0" -DgroupId=your_group_id -DartifactId=your_child_module_id
-		mvn -f ${item}/pom.xml versions:set -DnewVersion="4.200.0"
+		Updateversion "learnredis"
 	fi
 done
 
-# Iterate through the changed files and print the complete paths
-#IFS=$'\n'
-#for file in $changedFiles; do
-#    completePath="${rootPath}/${file}"
-#    echo "Complete Path: ${completePath}"
- # Extract the root path
-#    rootPathOfFile=$(dirname "${completePath}")
 
-    # Print the result
-#    echo "File: ${completePath}"
-#    echo "Root Path: ${rootPathOfFile}"
-#done
-changedModules=($(getChangedModules))
+#commit_db_updates
 
-if [ ${#changedModules[@]} -gt 0 ]; then
-    for module in "${changedModules[@]}"; do
-        echo "Building module: $module"
-        cd "$module" || exit
-        mvn clean install
-        cd ..
-    done
-else
-    echo "No changes detected. Skipping build."
-fi

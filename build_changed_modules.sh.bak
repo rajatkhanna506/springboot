@@ -31,7 +31,7 @@ echo "source file $sourceFile"
   CURRENT_VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
   echo "Setting up Current Version: $CURRENT_VERSION"
 		if [ -z "$module" ]; then
-			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
 		else
 			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
 		fi

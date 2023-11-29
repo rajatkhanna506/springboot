@@ -13,7 +13,11 @@ projectRoot="C:/Spring/spring/learn-spring-framework"
 
 # Specify the source module and its version.db file
 echo "Chnaged in module $module"
-sourceFile="${projectRoot}/${module}/current-minor-version.db"
+	if [ -z "$module" ]; then
+		sourceFile="${projectRoot}/current-minor-version.db"
+	else
+		sourceFile="${projectRoot}/${module}/current-minor-version.db"
+	fi
 echo "source file $sourceFile"
  MINOR_VERSION=`cat $sourceFile`
   #if [[ $GIT_BRANCH == *Develop* ]]
@@ -25,8 +29,13 @@ echo "source file $sourceFile"
   #fi
   MINOR_VERSION="$((MINOR_VERSION + 1))"
   CURRENT_VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
-  echo "Setting up MiloCommon Current Version: $CURRENT_VERSION"
- 		mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+  echo "Setting up Current Version: $CURRENT_VERSION"
+		if [ -z "$module" ]; then
+			mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+		else
+			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+		fi
+		
 
 }
 

@@ -3,6 +3,8 @@
 # Function to get changed modules
 MAJOR_VERSION=4
 PATCH_VERSION=0
+
+# update version
 Updateversion(){
 local module=$1
 
@@ -92,16 +94,19 @@ for file in "${filesArray[@]}"; do
 	else
 		echo "parent module"
 		addToMyArray "parentmodule"
-		#isParentModule
 	fi
     #echo "File: $file"
 done
 echo "Updated Array: ${myArray[@]}"
 
 for item in "${myArray[@]}"; do
-	if [[ "$item" == *"learnredis"* ]]; then
+	if [[ "$item" == *"learncore"* ]]; then
 		#mvn versions:set -DnewVersion="4.200.0" -DgroupId=your_group_id -DartifactId=your_child_module_id
-		Updateversion "learnredis"
+		Updateversion "learncore"
+	elif [[ "$item" == *"learnredis"* ]]; then
+		Updateversion "learncore"
+	else
+		Updateversion 
 	fi
 done
 

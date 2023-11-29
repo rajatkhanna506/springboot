@@ -33,6 +33,7 @@ echo "source file $sourceFile"
 		if [ -z "$module" ]; then
 			mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
 		else
+			echo "here"
 			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
 		fi
 		

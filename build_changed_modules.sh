@@ -114,7 +114,7 @@ for item in "${myArray[@]}"; do
 		#mvn versions:set -DnewVersion="4.200.0" -DgroupId=your_group_id -DartifactId=your_child_module_id
 		Updateversion "learncore"
 	elif [[ "$item" == *"learnredis"* ]]; then
-		Updateversion "learncore"
+		Updateversion "learnredis"
 	else
 		Updateversion 
 	fi

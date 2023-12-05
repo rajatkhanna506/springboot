@@ -13,6 +13,7 @@ projectRoot="C:/Spring/spring/learn-spring-framework"
 
 # Specify the source module and its version.db file
 echo "Changed in module $module"
+		# checking string is empty or not
 	if [ -z "$module" ]; then
 		sourceFile="${projectRoot}/current-minor-version.db"
 	else
@@ -37,15 +38,7 @@ echo "source file $sourceFile"
 		else
 			echo "child module"
 			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false -DupdateChildModules=false
-			
-			# Update the version in the POM file
-			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
-
-			# Build the specified module
-			
 		fi
-		
-
 }
 
 commit_db_updates(){
@@ -58,21 +51,9 @@ commit_db_updates(){
   git push origin $GIT_BRANCH --force
 }
 
-isParentModule() {
-mvn -f ${MODULE_NAME}/pom.xml versions:set -DnewVersion=${NEW_VERSION}
 
-    if grep -q '<packaging>pom</packaging>' pom.xml; then
-		echo "parent moudle deployment"
-        return 0 # true
-		
-    else
-		echo "NOT a parent moudle deployment"
-        return 1 # false
-    fi
-	# old code but remove deprocess but have to update child version as well
-}
 
-# Function to add data to the array if not present
+# Function to add data to the array if earlier not present in array
 addToMyArray() {
     local data=$1
     # Check if the data is not already in the array
@@ -117,6 +98,7 @@ for file in "${filesArray[@]}"; do
 done
 echo "Updated Array: ${myArray[@]}"
 
+# calling updateVersion method
 for item in "${myArray[@]}"; do
 	if [[ "$item" == *"learncore"* ]]; then
 		#mvn versions:set -DnewVersion="4.200.0" -DgroupId=your_group_id -DartifactId=your_child_module_id

@@ -32,11 +32,14 @@ echo "source file $sourceFile"
   echo "Setting up Current Version: $CURRENT_VERSION"
 		# checking string is empty or not
 		if [ -z "$module" ]; then
-			#mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
-			sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" moduleA/pom.xml
+			mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" pom.xml
 		else
 			echo "child module"
-			#mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			mvn clean install -pl ${module}
+
+			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
 		fi
 		
 

@@ -12,7 +12,7 @@ local module=$1
 projectRoot="C:/Spring/spring/learn-spring-framework"
 
 # Specify the source module and its version.db file
-echo "Chnaged in module $module"
+echo "Changed in module $module"
 	if [ -z "$module" ]; then
 		sourceFile="${projectRoot}/current-minor-version.db"
 	else
@@ -30,11 +30,16 @@ echo "source file $sourceFile"
   MINOR_VERSION="$((MINOR_VERSION + 1))"
   CURRENT_VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
   echo "Setting up Current Version: $CURRENT_VERSION"
+		# checking string is empty or not
 		if [ -z "$module" ]; then
 			mvn -f pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" pom.xml
 		else
-			echo "here"
+			echo "child module"
 			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			mvn clean install -pl ${module}
+
+			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
 		fi
 		
 
@@ -45,7 +50,7 @@ commit_db_updates(){
   git fetch && git checkout $GIT_BRANCH
   echo $MINOR_VERSION>current-minor-version.db
   git status
-  git add current-minor-version.db
+  git add .
   git commit -m "Updated release version file"
   git push origin $GIT_BRANCH --force
 }
@@ -116,6 +121,7 @@ for item in "${myArray[@]}"; do
 	elif [[ "$item" == *"learnredis"* ]]; then
 		Updateversion "learnredis"
 	else
+	# for parent module
 		Updateversion 
 	fi
 done

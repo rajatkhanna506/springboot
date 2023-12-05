@@ -22,7 +22,6 @@ public class TestingRedis {
   int d;
   int gde;
   int gct;
-  int h;
 }
 
 

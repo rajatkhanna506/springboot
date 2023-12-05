@@ -21,7 +21,7 @@ public class TestingRedis {
   int b;
   int d;
   int gde;
-  int sr;
+  
   
   
 }

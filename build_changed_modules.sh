@@ -40,6 +40,7 @@ echo "source file $sourceFile"
 			
 			# Update the version in the POM file
 			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
+			mvn clean install -pl ${MODULE_NAME}
 
 			# Build the specified module
 			

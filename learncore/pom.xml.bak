@@ -8,6 +8,6 @@
 	</parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>learncorespring</groupId>
-  <artifactId>learn core</artifactId>
+  <artifactId>learncore</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 </project>

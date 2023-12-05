@@ -113,5 +113,5 @@ for item in "${myArray[@]}"; do
 done
 
 
-#commit_db_updates
+commit_db_updates
 

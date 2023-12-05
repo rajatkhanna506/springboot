@@ -70,12 +70,13 @@ declare -a filesArray
 declare -a myArray
 	echo "start checking changes"
 	changedFiles=$(git diff --name-only HEAD^)
-	#echo $changedFiles
+	echo "changed files from head ${changedFiles}"
 	#rootPath=$(git rev-parse --show-toplevel)
-	IFS=$'\n'
+	#IFS=$'\n'
 	while read -r file; do
     #completePath="${rootPath}/${file}"
 	completePath="${file}"
+	echo "loopings file ${file}"
     # Add the file to the array
     filesArray+=("${completePath}")
 done <<< "$changedFiles"

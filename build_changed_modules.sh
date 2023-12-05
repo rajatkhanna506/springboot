@@ -42,7 +42,7 @@ echo "source file $sourceFile"
 			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
 
 			# Build the specified module
-			mvn clean install -pl ${module}
+			
 		fi
 		
 

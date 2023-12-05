@@ -36,7 +36,7 @@ echo "source file $sourceFile"
 			
 		else
 			echo "child module"
-			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -pl ${module} -DgenerateBackupPoms=false
 			
 			# Update the version in the POM file
 			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml

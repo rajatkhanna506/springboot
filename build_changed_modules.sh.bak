@@ -39,7 +39,7 @@ echo "source file $sourceFile"
 			#mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
 			
 
-			sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
+			sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml -DgenerateBackupPoms=false
 			
 			mvn clean install -pl ${module}
 		fi

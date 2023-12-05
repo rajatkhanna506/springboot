@@ -36,10 +36,12 @@ echo "source file $sourceFile"
 			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" pom.xml
 		else
 			echo "child module"
-			mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
-			mvn clean install -pl ${module}
+			#mvn -f ${module}/pom.xml versions:set -DnewVersion=$CURRENT_VERSION -DgenerateBackupPoms=false
+			
 
-			#sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
+			sed -i "s/<version>.*<\/version>/<version>${CURRENT_VERSION}<\/version>/" ${module}/pom.xml
+			
+			mvn clean install -pl ${module}
 		fi
 		
 

@@ -11,7 +11,7 @@ public class GameRunner {
 	int ab;
 	int xyz;
 	int d;
-	
+	int e;
 	
 
 	public GameRunner(GamingConsole game) {

@@ -11,7 +11,6 @@ public class GameRunner {
 	int ab;
 	int xyz;
 	int d;
-	int efg;
 	int hjh;
 	
 

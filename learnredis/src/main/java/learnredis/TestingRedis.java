@@ -19,7 +19,7 @@ public class TestingRedis {
 
   int a;
   int b;
-  int d;
+  
   int e;
   
   

@@ -9,15 +9,17 @@ Updateversion(){
 local module=$1
 
 # Assuming you are in the root directory of your project
-projectRoot="C:/Spring/spring/learn-spring-framework"
+repo_url="https://github.com/rajatkhanna506/springboot/blob/main/"
+#projectRoot="C:/Spring/spring/learn-spring-framework"
+
 
 # Specify the source module and its version.db file
 echo "Changed in module $module"
 		# checking string is empty or not
 	if [ -z "$module" ]; then
-		sourceFile="${projectRoot}/current-minor-version.db"
+		sourceFile="${repo_url}/current-minor-version.db"
 	else
-		sourceFile="${projectRoot}/${module}/current-minor-version.db"
+		sourceFile="${repo_url}/${module}/current-minor-version.db"
 	fi
 echo "source file $sourceFile"
  MINOR_VERSION=`cat $sourceFile`

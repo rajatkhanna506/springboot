@@ -9,7 +9,7 @@ Updateversion(){
 local module=$1
 
 # Assuming you are in the root directory of your project
-repo_url="https://github.com/rajatkhanna506/springboot/blob/main/"
+repo_url="https://github.com/rajatkhanna506/springboot/blob/main"
 #projectRoot="C:/Spring/spring/learn-spring-framework"
 
 

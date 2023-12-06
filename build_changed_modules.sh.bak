@@ -6,9 +6,14 @@ PATCH_VERSION=0
 #clone temporary file
 tempFileClone()
 {
+	git_version=$(git --version)
+
+# Print the version or use it in subsequent commands
+echo "Git Version: $git_version"
 	local sourceFile=$1
 	# Clone the Git repository (if not already cloned)
-	git clone $sourceFile
+	target_directory= "C:/Spring/spring/learn-spring-framework/tmp"
+	git clone $sourceFile $target_directory
 
 	# Navigate to the repository directory
 	cd C:/Spring/spring/learn-spring-framework/tmp
@@ -29,19 +34,19 @@ local module=$1
 
 # Assuming you are in the root directory of your project
 repo_url="https://github.com/rajatkhanna506/springboot/blob/main"
-#projectRoot="C:/Spring/spring/learn-spring-framework"
+projectRoot="C:/Spring/spring/learn-spring-framework"
 
-
+tempFileClone "${repo_url}"
 # Specify the source module and its version.db file
 echo "Changed in module $module"
 		# checking string is empty or not
 	if [ -z "$module" ]; then
-		sourceFile="${repo_url}/current-minor-version.db"
-		tempFileClone "$sourceFile"
+		sourceFile="${projectRoot}/current-minor-version.db"
+		#tempFileClone "$sourceFile"
 		
 	else
-		sourceFile="${repo_url}/${module}/current-minor-version.db"
-		tempFileClone "$sourceFile"
+		sourceFile="${projectRoot}/${module}/current-minor-version.db"
+		#tempFileClone "$sourceFile"
 	fi
 echo "source file $sourceFile"
  MINOR_VERSION=`cat $sourceFile`
@@ -66,8 +71,11 @@ echo "source file $sourceFile"
 }
 
 commit_db_updates(){
+git_version=$(git --version)
+
+# Print the version or use it in subsequent commands
+echo "Git Version: $git_version"
   echo "Minor Version $MINOR_VERSION update to GitHub $GIT_BRANCH"
-  git fetch && git checkout $GIT_BRANCH
   echo $MINOR_VERSION>current-minor-version.db
   git status
   git add .

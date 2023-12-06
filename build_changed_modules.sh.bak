@@ -12,11 +12,10 @@ tempFileClone()
 echo "Git Version: $git_version"
 	local sourceFile=$1
 	# Clone the Git repository (if not already cloned)
-	target_directory= "C:/Spring/spring/learn-spring-framework/tmp"
-	git clone $sourceFile $target_directory
+	git clone $sourceFile/
 
 	# Navigate to the repository directory
-	cd C:/Spring/spring/learn-spring-framework/tmp
+	cd C:/Spring/spring/tmp
 
 	# Read the content of the file
 	file_content=$(git show HEAD:$file_path)
@@ -33,10 +32,10 @@ Updateversion(){
 local module=$1
 
 # Assuming you are in the root directory of your project
-repo_url="https://github.com/rajatkhanna506/springboot/blob/main"
+#repo_url="https://github.com/rajatkhanna506/springboot/blob/main"
 projectRoot="C:/Spring/spring/learn-spring-framework"
 
-tempFileClone "${repo_url}"
+
 # Specify the source module and its version.db file
 echo "Changed in module $module"
 		# checking string is empty or not

@@ -6,6 +6,7 @@ PATCH_VERSION=0
 #clone temporary file
 tempFileClone()
 {
+	local sourceFile=$1
 	# Clone the Git repository (if not already cloned)
 	git clone $sourceFile
 
@@ -36,10 +37,11 @@ echo "Changed in module $module"
 		# checking string is empty or not
 	if [ -z "$module" ]; then
 		sourceFile="${repo_url}/current-minor-version.db"
-		
+		tempFileClone "$sourceFile"
 		
 	else
 		sourceFile="${repo_url}/${module}/current-minor-version.db"
+		tempFileClone "$sourceFile"
 	fi
 echo "source file $sourceFile"
  MINOR_VERSION=`cat $sourceFile`

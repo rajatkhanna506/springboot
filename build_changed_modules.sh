@@ -11,7 +11,7 @@ tempFileClone()
 	git clone $sourceFile
 
 	# Navigate to the repository directory
-	cd C:/Spring/spring/learn-spring-framework/tmp
+	cd C:/Spring/spring/tmp
 
 	# Read the content of the file
 	file_content=$(git show HEAD:$file_path)

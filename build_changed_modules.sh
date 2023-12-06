@@ -3,7 +3,26 @@
 # Function to get changed modules
 MAJOR_VERSION=4
 PATCH_VERSION=0
+#clone temporary file
+tempFileClone()
+{
+	local sourceFile=$1
+	# Clone the Git repository (if not already cloned)
+	git clone $sourceFile
 
+	# Navigate to the repository directory
+	cd /tmp/git_repo
+
+	# Read the content of the file
+	file_content=$(git show HEAD:$file_path)
+
+	# Print or process the file content
+	echo "$file_content"
+
+	# Clean up (optional, remove the temporary clone)
+	cd ~  # Navigate back to the original directory
+	rm -rf /tmp/git_repo  # Remove the temporary clone
+}
 # update version
 Updateversion(){
 local module=$1
@@ -18,8 +37,11 @@ echo "Changed in module $module"
 		# checking string is empty or not
 	if [ -z "$module" ]; then
 		sourceFile="${repo_url}/current-minor-version.db"
+		tempFileClone "$sourceFile"
+		
 	else
 		sourceFile="${repo_url}/${module}/current-minor-version.db"
+		tempFileClone "$sourceFile"
 	fi
 echo "source file $sourceFile"
  MINOR_VERSION=`cat $sourceFile`
